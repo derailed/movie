@@ -7,6 +7,19 @@ import (
 	"github.com/go-yaml/yaml"
 )
 
+// MOVIES in memory movie corpus
+const MOVIES = `
+movies:
+- name: m1
+  icons:
+  - name: ic1
+  - name: ic2
+- name: m2
+  icons:
+  - name: ic11
+	- name: ic21
+`
+
 type (
 	// Icon an emoji representation
 	Icon struct {
@@ -25,8 +38,20 @@ type (
 	}
 )
 
-// Load the movie database
-func Load(path string) (Movies, error) {
+// LoadMem the movie database from memory
+func LoadMem(path string) (Movies, error) {
+	var movies Movies
+
+	err = yaml.Unmarshal(data, &movies)
+	if err != nil {
+		return movies, err
+	}
+
+	return movies, nil
+}
+
+// LoadFile the movie database from file
+func LoadFile(path string) (Movies, error) {
 	var movies Movies
 
 	data, err := ioutil.ReadFile(path)
