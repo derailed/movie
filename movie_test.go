@@ -1,7 +1,6 @@
 package movie_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/derailed/movie"
@@ -13,8 +12,6 @@ func TestLoad(t *testing.T) {
 	assert.Nil(t, err)
 
 	assert.Equal(t, len(data.Movies), 2)
-	fmt.Printf("%#v\n", data.Movies)
-
 	assert.Equal(t, "m1", data.Movies[0].Name)
 	assert.Equal(t, "ic1", data.Movies[0].Icons[0].Name)
 }
