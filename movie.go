@@ -1,7 +1,6 @@
 package movie
 
 import (
-	"fmt"
 	"io/ioutil"
 
 	"github.com/go-yaml/yaml"
@@ -10,14 +9,18 @@ import (
 // MOVIES in memory movie corpus
 const MOVIES = `
 movies:
-- name: m1
+- name: Home Alone
   icons:
-  - name: ic1
-  - name: ic2
-- name: m2
+  - name: ! "🏡"
+  - name: ! "🍣"
+- name: Terminator
   icons:
-  - name: ic11
-	- name: ic21
+  - name: ! "🏡"
+  - name: ! "👻"
+- name: Ghost
+  icons:
+  - name: ! "🏡"
+  - name: ! "👻"
 `
 
 type (
@@ -39,15 +42,9 @@ type (
 )
 
 // LoadMem the movie database from memory
-func LoadMem(path string) (Movies, error) {
-	var movies Movies
-
-	err = yaml.Unmarshal(data, &movies)
-	if err != nil {
-		return movies, err
-	}
-
-	return movies, nil
+func LoadMem() (d Movies, err error) {
+	err = yaml.Unmarshal([]byte(MOVIES), &d)
+	return
 }
 
 // LoadFile the movie database from file
@@ -61,7 +58,6 @@ func LoadFile(path string) (Movies, error) {
 
 	err = yaml.Unmarshal(data, &movies)
 	if err != nil {
-		fmt.Println("YO!")
 		return movies, err
 	}
 
